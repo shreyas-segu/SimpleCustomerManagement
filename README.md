@@ -1,0 +1,2 @@
+# SimpleCustomerManagement
+MERN project
