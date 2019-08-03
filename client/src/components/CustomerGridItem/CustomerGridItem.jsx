@@ -27,7 +27,6 @@ export default class CustomerGridItem extends Component {
     delete() {
         deleteRecord(this.props.value._id, (response) => {
             this.props.refreshRecords();
-            console.log(response)
         })
     }
     save(event) {

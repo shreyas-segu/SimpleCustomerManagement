@@ -1,9 +1,11 @@
+//Controllers for all actions
+
 const mongoose = require("mongoose"),
   Customer = mongoose.model("Customer");
 
 exports.getAllCustomers = (req, res) => {
   Customer.find({}, (err, customers) => {
-    if (err) res.send(err);
+    if (err) res.status(500).send(err.errmsg);
     res.json(customers);
   });
 };
@@ -11,14 +13,14 @@ exports.getAllCustomers = (req, res) => {
 exports.createCustomer = (req, res) => {
   let customer = new Customer(req.body);
   customer.save(customer, (err, customer) => {
-    if (err) res.send(err);
-    res.json(customer);
+    if (err) res.status(500).send(err.errmsg);
+    res.status(201).json(customer);
   });
 };
 
 exports.getCustomer = (req, res) => {
   Customer.findById(req.params.id, (err, customer) => {
-    if (err) res.send(err);
+    if (err) res.status(500).send(err.errmsg);
     res.json(customer);
   });
 };
@@ -37,8 +39,8 @@ exports.updateCustomer = (req, res) => {
     },
     { new: true },
     (err, customer) => {
-      if (err) res.send(err);
-      res.json(customer);
+      if (err) res.send(err.errmsg);
+      res.status(202).json(customer);
     }
   );
 };

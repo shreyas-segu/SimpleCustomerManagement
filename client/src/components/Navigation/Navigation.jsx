@@ -31,9 +31,7 @@ export default class Navigation extends Component {
             age: this.state.age,
             address: this.state.address
         }
-        console.log(Customer)
         addRecord(Customer, (response) => {
-            console.log(response)
             this.props.refreshRecords();
         });
 

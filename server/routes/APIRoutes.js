@@ -1,5 +1,5 @@
 const CustomersController = require("../controllers/CustomerController");
-
+//Registering routes for the API endpoints
 module.exports = app => {
   app
     .route("/customers")

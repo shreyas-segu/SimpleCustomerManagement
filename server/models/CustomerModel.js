@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
+//Document Model
 var CustomerSchema = new Schema({
   firstName: {
     type: String,

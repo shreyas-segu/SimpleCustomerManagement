@@ -1,21 +1,22 @@
 const express = require("express"),
   app = express(),
-  port = process.env.PORT || 3000,
   mongoose = require("mongoose"),
   Customer = require("./models/CustomerModel"),
   bodyParser = require("body-parser"),
-  cors = require("cors");
+  cors = require("cors"),
+  dotenv = require("dotenv").config();
 
-mongoose.connect("mongodb://localhost:27017/customerInfo", {
+const port = process.env.PORT || 3001;
+mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true
 });
-
+console.log(process.env.port);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const routes = require("./routes/APIRoutes"); //importing route
-routes(app); //register the route
+const routes = require("./routes/APIRoutes");
+routes(app);
 
 app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + " not found" });

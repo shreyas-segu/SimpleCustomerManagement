@@ -12,14 +12,14 @@ export default class Layout extends Component {
         this.getCustomers = this.getCustomers.bind(this);
         this.refreshRecords = this.refreshRecords.bind(this);
     }
-
+    //getting records and passing as props
     getCustomers() {
         getRecords(response => {
             this.setState({ records: response });
         });
     }
+    //used to reload the records in case of any additions, deletions or modifications
     refreshRecords() {
-        console.log('here');
         this.getCustomers();
     }
     componentDidMount() {
