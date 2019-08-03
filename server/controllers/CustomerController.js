@@ -9,8 +9,8 @@ exports.getAllCustomers = (req, res) => {
 };
 
 exports.createCustomer = (req, res) => {
-  let newCustomer = new Customer(req.body);
-  newCustomer.save({}, (err, customer) => {
+  let customer = new Customer(req.body);
+  customer.save(customer, (err, customer) => {
     if (err) res.send(err);
     res.json(customer);
   });
@@ -26,7 +26,15 @@ exports.getCustomer = (req, res) => {
 exports.updateCustomer = (req, res) => {
   Customer.findOneAndUpdate(
     { _id: req.params.id },
-    req.body,
+    {
+      $set: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        dob: req.body.dob,
+        age: req.body.age,
+        address: req.body.address
+      }
+    },
     { new: true },
     (err, customer) => {
       if (err) res.send(err);
@@ -36,7 +44,7 @@ exports.updateCustomer = (req, res) => {
 };
 
 exports.deleteCustomer = (req, res) => {
-  Customer.remove({ _id: req.params.id }, err => {
+  Customer.deleteOne({ _id: req.params.id }, err => {
     if (err) res.send(err);
     res.json({ message: "deleted" });
   });
